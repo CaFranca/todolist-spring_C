@@ -11,7 +11,20 @@
     <h1>Minha Lista</h1>
     <div class="center-content">
         Versão inicial da aplicação de lista de tarefas para a disciplina SPODWE2
+
     </div>
+    <div className="center-content">
+        <a href="#" id="filter-all">
+            Todos os itens
+        </a>
+        <a href="#" id="filter-done">
+            Concluídos
+        </a>
+        <a href="#" id="filter-pending">
+            Pendentes
+        </a>
+    </div>
+
     <input type="text" id="new-todo" placeholder="Adicione aqui sua nova tarefa">
     <ul id="todo-list">
         <li th:each="tarefa: ${tarefas}" th:switch="${tarefa.concluida()}">
