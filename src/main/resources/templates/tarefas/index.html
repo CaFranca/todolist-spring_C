@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Tarefas</title>
+</head>
+<body>
+<main class="container">
+    <h1>Minha Lista</h1>
+    <div class="center-content">
+        Versão inicial da aplicação de lista de tarefas para a disciplina SPODWE2
+    </div>
+    <input type="text" id="new-todo" placeholder="Adicione aqui sua nova tarefa">
+    <ul id="todo-list">
+        <li th:each="tarefa: ${tarefas}" th:switch="${tarefa.concluida()}">
+            <div th:case="${true}">
+                <span th:text="${tarefa.texto}" /> <button>Concluir</button>
+            </div>
+            <div th:case="${false}">
+                <span th:text="${tarefa.texto}" style="text-decoration:line-through" />
+            </div>
+        </li>
+    </ul>
+</main>
+</body>
+</html>
