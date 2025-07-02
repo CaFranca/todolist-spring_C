@@ -20,12 +20,16 @@
         <a href="#" th:href="@{/tarefas(filtro='pendentes')}"> Pendentes </a>
       </div>
 
+      <!-- O atributo th:object indica qual propriedade adicionada ao Model contém o objeto
+       que será usado neste formulário -->
       <form
         action="#"
         th:action="@{/tarefas}"
         th:object="${tarefaForm}"
         method="post"
       >
+        <!-- O atributo th:field indica qual propriedade do objeto será usada para o campo de entrada 
+         o "*" toma como referência o th:object definido-->
         <input
           type="text"
           th:field="*{texto}"
@@ -35,13 +39,19 @@
       </form>
 
       <ul id="todo-list">
-        <li th:each="tarefa: ${tarefas}" th:switch="${tarefa.concluida()}">
+        <!-- Exemplo de utilização de alguns atributos do thymeleaf:
+          - "th:each", para iteração em uma lista: no caso, "tarefas", que foi adicionada ao model, onde 
+          a iteração atribuirá cada tarefa da lista a a uma variável "tarefa" 
+          - "th:switch", para permitir a renderização condicional...-->
+        <li th:each="tarefa: ${tarefas}" th:switch="${tarefa.isConcluida()}">
+          <!-- De cada um dos casos, a partir do atributo "th:case". Neste primeiro caso, quando a propriedade for "false"...-->
           <div th:case="${false}">
             <span th:text="${tarefa.texto}" />
             <a href="#" class="button" th:href="@{/tarefas/{id}/marcar-como-concluida(id=${tarefa.id})}">
               Concluir
             </a>
           </div>
+          <!-- E aqui quando for "true"-->
           <div th:case="${true}">
             <span
               th:text="${tarefa.texto}"
